@@ -72,7 +72,9 @@ if (isset($article)){
     $query= $posts_data_query."WHERE textupdates.replaced_at IS NULL AND posts.id = ${article} ";
     $articledata=qq($query)->fetch_assoc();
 
-    if ((gmp_init($_SESSION['perms']) & gmp_init($articledata['p_category'])) == 0 ){
+
+
+    if (BC::comp(BC::bitAnd($_SESSION['perms'], $articledata['p_category']), '0' )){
         $_SESSION["msg"]="No Tenes Permiso para editar este articulo";
         $_SESSION["icon"]="error";
         header('Location: /');
@@ -99,7 +101,7 @@ if (isset($article)){
     EOF; //all this just to avoid doing it in js which ill have to do later anyway.
     $permsdata=entries($query);
 } else {
-    if (gmp_init($_SESSION['perms'])  == 0 ){
+    if (BC::comp($_SESSION['perms'], '0' )){
         $_SESSION["msg"]="No Tenes Permiso para crear un articulo";
         $_SESSION["icon"]="error";
         header('Location: /');
@@ -114,7 +116,8 @@ if (isset($article)){
 
 //TODO might remove this later, i think this is all done with php directly 
 $jsvars=array_merge($jsvars, ['perms'=>$_SESSION['perms'], 'permsdata'=>entries( "SELECT * FROM categories", false, 'id')]);
-$staticdisabled = gmp_intval((gmp_init($_SESSION['perms']) & 9) == 0);
+
+$staticdisabled = intval((BC::comp(BC::bitAnd($_SESSION['perms'], '9'), '0' )));
 
 
 require_once 'partials/documenthead.php';

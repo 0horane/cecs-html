@@ -94,11 +94,11 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/logout">Cerrar sesion</a></li>
-            <?php $_userperms=gmp_init($_SESSION['perms']); ?>
-            <?= ($_userperms) != 0 ? '<li><a class="dropdown-item font-sans" href="/editar">Nuevo Post</a></li>' : "" ?>
-            <?= ($_userperms & 0b10000000000) != 0 ? '<li><a class="dropdown-item font-sans" href="/admin/codes">Administrar Codigos</a></li>' : "" ?>
-            <?= ($_userperms & 0b100000000000) != 0 ? '<li><a class="dropdown-item font-sans" href="/admin/users">Administrar Usuarios</a></li>' : "" ?>
-            <?= ($_userperms & 0b1000000000000) != 0 ? '<li><a class="dropdown-item font-sans" href="/admin/cats">Administrar Categorias</a></li>' : "" ?>
+            <?php $_userperms=$_SESSION['perms']; ?>
+            <?= !BC::comp($_userperms, 0) ? '<li><a class="dropdown-item font-sans" href="/editar">Nuevo Post</a></li>' : "" ?>
+            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b10000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/codes">Administrar Codigos</a></li>' : "" ?>
+            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b100000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/users">Administrar Usuarios</a></li>' : "" ?>
+            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b1000000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/cats">Administrar Categorias</a></li>' : "" ?>
           </ul>
         </li>
         <?php } ?>

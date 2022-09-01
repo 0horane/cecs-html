@@ -46,8 +46,8 @@ assertExitCode( $_POST['id']==="0"  , "403 Forbidden");
     $oldrowobj = $link->query("SELECT * FROM users WHERE id = ${_POST['id']}");
     assertExitCode( !$oldrowobj || !$oldrowobj->num_rows, "400 Bad Request");
     $oldrow=$oldrowobj->fetch_assoc();
-    $changedperms=gmp_init($_POST['perms']) ^ gmp_init($oldrow['perms']);
-    assertExitCode( !(($userperms & $changedperms) == $changedperms), "403 Forbidden");
+    $changedperms=  BC::bitXor( $_POST['perms'], $oldrow['perms']);
+    assertExitCode( !( BC::comp( BC::bitAnd($userperms, $changedperms), $changedperms)), "403 Forbidden");
 
     $query= "UPDATE users SET name = '${_POST['name']}' , perms = ${_POST['perms']}, nickname = '${_POST['nickname']}', email = '${_POST['email']}' , updated_at = NOW() WHERE id = ${_POST['id']} ";
     qq($query, "500 Internal Server Error");

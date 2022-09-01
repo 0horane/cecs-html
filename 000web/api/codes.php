@@ -27,8 +27,8 @@ if (isset($_POST['id'])){
     $oldrowobj = $link->query("SELECT * FROM users WHERE id = ${_POST['id']} AND password IS NULL");
     assertExitCode( !$oldrowobj || !$oldrowobj->num_rows, "400 Bad Request");
     $oldrow=$oldrowobj->fetch_assoc();
-    $changedperms=gmp_init($_POST['perms']) ^ gmp_init($oldrow['perms']);
-    assertExitCode( !(($userperms & $changedperms) == $changedperms), "403 Forbidden");
+    $changedperms=  BC::bitXor( $_POST['perms'], $oldrow['perms']);
+    assertExitCode( !( BC::comp( BC::bitAnd($userperms, $changedperms), $changedperms)), "403 Forbidden");
 
     $query= "UPDATE users SET name = '${_POST['name']}' , perms = ${_POST['perms']} WHERE id = ${_POST['id']} AND password IS NULL";
     qq($query, "500 Internal Server Error");
@@ -38,13 +38,13 @@ if (isset($_POST['id'])){
 } else {
   $globalPerms=entries( "SELECT * FROM categories", false, "id", "500 Internal Server Error");
     
-  $submittedPerms=gmp_init(0); //this one verifies if the user has all the required categories
+  $submittedPerms='0'; //this one verifies if the user has all the required categories
 
   foreach ($_POST['perms'] as $category){
-    $submittedPerms |= gmp_init(2)**gmp_init($category);   
+    $submittedPerms = BC::bitOr($submittedPerms, BC::pow('2'**$category));   
   }
 
-  assertExitCode(!($submittedPerms == ($userperms & $submittedPerms)), "403 Forbidden");
+  assertExitCode(!(BC::comp($submittedPerms == BC::bitAnd($userperms, $submittedPerms))), "403 Forbidden");
   assertExitCode(!(isset($_POST['name']) && $_POST['name']!=""), "400 Bad Request");
 
   $code= substr(md5(rand()),0,8);
@@ -52,7 +52,7 @@ if (isset($_POST['id'])){
     $code=substr(md5(rand()),0,8);
   }
 
-  $query="INSERT INTO users VALUES(null, '${_POST['name']}', null, ${submittedPerms}, null, null, null, null, NOW(), '${code}')";
+  $query="INSERT INTO users VALUES(null, '${_POST['name']}', null, "+intval(submittedPerms)+", null, null, null, null, NOW(), '${code}')";
   $result=qq($query, "500 Internal Server Error");
   echo true;
 

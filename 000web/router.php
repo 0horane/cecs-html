@@ -1,6 +1,7 @@
 <?php //Copyright (c) 2021 <info@phprouter.com> MIT licence
 
 session_start();
+use BCMathExtended\BC;
 function prdebug(){echo "<br><br><pre>";var_dump($_SESSION);echo "</pre><br><br><pre>";var_dump($_POST);}
 function get($route, $path_to_include, $variables=[]){
   if( $_SERVER['REQUEST_METHOD'] == 'GET' ){ route($route, $path_to_include, $variables); }  

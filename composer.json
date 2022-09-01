@@ -1,0 +1,5 @@
+{
+    "require": {
+        "krowinski/bcmath-extended": "^6.0"
+    }
+}

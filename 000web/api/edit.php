@@ -51,17 +51,16 @@ if (isset($_POST['id'])){ //if editing (not creating new)
 } else {
     $globalCategories=entries( "SELECT * FROM categories", false, "id", "500 Internal Server Error");
     
-    $addedpostcategories=gmp_init(0); //this one verifies if the user has all the required categories
-    $parentcategories=gmp_init(0); //the parent categories of each of the categories
+    $addedpostcategories='0'; //this one verifies if the user has all the required categories
+    $parentcategories='0'; //the parent categories of each of the categories
 
     foreach ($_POST['categories'] as $category){
-        $parentcategories |= gmp_init($globalCategories[$category]['parents']); 
-        $addedpostcategories |= gmp_init(2)**gmp_init($category); 
-        
+        $parentcategories = BC::bitOr($parentcategories, $globalCategories[$category]['parents']); 
+        $addedpostcategories = BC::bitOr( $addedpostcategories, BC::pow('2',$category));
     }
 
-    assertExitCode(!($addedpostcategories == ($userperms & $addedpostcategories)), "403 Forbidden");
-    assertExitCode($addedpostcategories == 0, "403 Forbidden");
+    assertExitCode(!( BC::comp($addedpostcategories,  BC::bitAnd($userperms , $addedpostcategories) ) ), "403 Forbidden");
+    assertExitCode(BC::comp($addedpostcategories, '0'), "403 Forbidden");
     assertExitCode(!(isset($_POST['type']) && isset($_POST['title'])), "400 Bad Request");
     assertExitCode($_POST['type']=='vote' && !( isset($_POST['end_date']) && $_POST['options'] != "[]"  ), "400 Bad Request");
     
@@ -71,7 +70,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
         "vote"=>16,
         "alert"=>32,
     ];
-    $finalcategories=$addedpostcategories | $parentcategories | gmp_init($postTypes[$_POST['type']]);
+    $finalcategories= BC::bitOr($addedpostcategories,BC::bitOr( $parentcategories,$postTypes[$_POST['type']));
     $end_date = isset($_POST['end_date']) ? "'".$_POST['end_date']."'" : "null";
 
     $postoptions = isset ($_POST['options']) ? "'".json_encode($_POST['options'])."'" : "null" ;
@@ -80,7 +79,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
         $css = sanitize("'/*CSS:DEFAULT*/'");
     }
 
-    $query= "INSERT INTO posts VALUES(null, '${_POST['title']}', NOW(), null, ${finalcategories}, ${end_date}, ${postoptions} ); ";
+    $query= "INSERT INTO posts VALUES(null, '${_POST['title']}', NOW(), null, "+intval($finalcategories)+", ${end_date}, ${postoptions} ); ";
     qq($query, "500 Internal Server Error");
     
     $newpostID=qq("SELECT MAX(id)  FROM  posts", "500 Internal Server Error")->fetch_row()[0];

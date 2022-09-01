@@ -41,18 +41,19 @@ assertExitCode( $_POST['id']>63  , "400 Bad Request");
 
     $globalCategories=entries( "SELECT * FROM categories", false, "id", "500 Internal Server Error");
     
-    $addedpostcategories=gmp_init(0); 
-    $parentcategories=gmp_init(0); //the parent categories of each of the categories
+    $addedpostcategories='0'; 
+    $parentcategories='0'; //the parent categories of each of the categories
 
     foreach ($_POST['perms'] as $category){
-        $parentcategories |= gmp_init($globalCategories[$category]['parents']); 
-        $addedpostcategories |= gmp_init(2)**gmp_init($category); 
+        $parentcategories = BC::bitOr($parentcategories, $globalCategories[$category]['parents'] ); 
+        
+		$addedpostcategories = BC::bitOr( BC::pow('2', $category) )
     }
 
-    $posttypeperms=gmp_init($catTypes[$_POST['type']]);
-    $finalcategories=$addedpostcategories | $parentcategories | $posttypeperms | $globalCategories[log(gmp_intval($posttypeperms),2)]['parents'] | 1;
+    $posttypeperms=$catTypes[$_POST['type']];
+    $finalcategories= BC::bitOr( BC::bitOr( BC::bitOr( BC::bitOr( $addedpostcategories, $parentcategories )  , $posttypeperms ) , strval($globalCategories[log(intval($posttypeperms),2)]['parents']) ) , '1');
 
-    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, ${finalcategories}, null ); ";
+    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, "+intval(finalcategories)+", null ); ";
     qq($query, "500 Internal Server Error");
     
     echo 1;

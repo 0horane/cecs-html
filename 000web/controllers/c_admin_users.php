@@ -10,7 +10,7 @@ $headertags='
 require_once 'assets/session_start.php';
 require_once 'assets/database.php';
 
-if ((gmp_init($_SESSION['perms']) & 2048) == 0 ){
+if (BC::comp(BC::bitAnd($_SESSION['perms'], '2048'), '0' )){
     $_SESSION["msg"]="No Tenes Permiso para administrar usuarios!";
     $_SESSION["icon"]="error";
     header('Location: /');
