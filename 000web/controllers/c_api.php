@@ -8,7 +8,7 @@ function authenticate($perms=false){ //TODO real authentication (Oauth?)
     
     if (isset($_SESSION['id'])){
         if ($perms){
-            return [$_SESSION['id'], gmp_init(qq("SELECT perms FROM users WHERE id = ${_SESSION['id']}")->fetch_assoc()["perms"])];
+            return [$_SESSION['id'], (qq("SELECT perms FROM users WHERE id = ${_SESSION['id']}")->fetch_assoc()["perms"])];
         } else {
             return $_SESSION['id'];
         }

@@ -10,7 +10,7 @@ $userdata= authenticate(true);
 $userid=$userdata[0];
 $userperms=$userdata[1];
 
-assertExitCode( ($userperms & 2048 ) == 0 , "403 Forbidden");
+assertExitCode( BC::comp(BC::bitAnd($userperms , 2048 ) , 0) , "403 Forbidden");
 
 if (isset($_POST['purge'])){
 

@@ -11,11 +11,11 @@ $postdataobj=qq($posts_data_query."WHERE posts.id = ${_POST['id']}", "500 Intern
 assertExitCode($postdataobj->num_rows==0, "404 Not Found");
 $postdata=$postdataobj->fetch_assoc();
 
-assertExitCode(($userperms & gmp_init($postdata['p_category'])) == 0, "403 Forbidden");
+assertExitCode(BC::comp(BC::bitAnd($userperms , ($postdata['p_category'])) , 0), "403 Forbidden");
 
-if ((($postdata['p_category'] & 512) == 512) && $postdata['p_deleted_at']){
+if (BC::comp(BC::bitAnd($postdata['p_category'] , 512) , 512) && $postdata['p_deleted_at']){
   $query="UPDATE posts SET deleted_at = NULL, category = category ^ 512 WHERE id = ${_POST['id']}";
-} else if ((($postdata['p_category'] & 512) == 0) && !$postdata['p_deleted_at']){
+} else if ( BC::comp(BC::bitAnd($postdata['p_category'], 512) , 0) && !$postdata['p_deleted_at']){
   $query="UPDATE posts SET deleted_at = NOW(), category = category ^ 512 WHERE id = ${_POST['id']}";
 } else {
   assertExitCode(1, "409 Conflict");

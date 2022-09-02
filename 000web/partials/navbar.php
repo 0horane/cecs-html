@@ -52,7 +52,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/secretarias">Secretarias</a></li>
-            <?php foreach ($allcategoriesassoc as $nsecretaria){ if ((gmp_init($nsecretaria['parents']) & 0b1000000) != 0){ ?>
+            <?php foreach ($allcategoriesassoc as $nsecretaria){ if (!BC::comp(BC::bitAnd($nsecretaria['parents'], 0b1000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/secretaria/<?= $nsecretaria['urlname'] ?>"><?= $nsecretaria['name'] ?></a></li>
             <?php } } ?>
           </ul>
@@ -63,7 +63,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/comisiones">Comisiones</a></li>
-            <?php foreach ($allcategoriesassoc as $ncomision){ if ((gmp_init($ncomision['parents']) & 0b10000000) != 0){ ?>
+            <?php foreach ($allcategoriesassoc as $ncomision){ if (!BC::comp(BC::bitAnd($ncomision['parents'], 0b10000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/comision/<?= $ncomision['urlname'] ?>"><?= $ncomision['name'] ?></a></li>
             <?php } } ?>
           </ul>
@@ -74,7 +74,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/clubes">Clubes</a></li>
-            <?php foreach ($allcategoriesassoc as $nclub){ if ((gmp_init($nclub['parents']) & 0b100000000) != 0){ ?>
+            <?php foreach ($allcategoriesassoc as $nclub){ if (!BC::comp(BC::bitAnd($nclub['parents'], 0b100000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/club/<?= $nclub['urlname'] ?>"><?= $nclub['name'] ?></a></li>
             <?php } } ?>
           </ul>

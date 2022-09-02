@@ -9,7 +9,7 @@
 $userdata= authenticate(true);
 $userid=$userdata[0];
 $userperms=$userdata[1];
-assertExitCode( ($userperms & 4096 ) == 0 , "403 Forbidden");
+assertExitCode( BC::comp(BC::bitAnd($userperms , 4096 ) , 0) , "403 Forbidden");
 assertExitCode( !(isset($_POST['id']) ) , "400 Bad Request");
 assertExitCode( $_POST['id']<20  , "403 Forbidden");
 assertExitCode( $_POST['id']>63  , "400 Bad Request");
@@ -47,13 +47,13 @@ assertExitCode( $_POST['id']>63  , "400 Bad Request");
     foreach ($_POST['perms'] as $category){
         $parentcategories = BC::bitOr($parentcategories, $globalCategories[$category]['parents'] ); 
         
-		$addedpostcategories = BC::bitOr( BC::pow('2', $category) )
+		$addedpostcategories = BC::bitOr( BC::pow('2', $category) );
     }
 
     $posttypeperms=$catTypes[$_POST['type']];
     $finalcategories= BC::bitOr( BC::bitOr( BC::bitOr( BC::bitOr( $addedpostcategories, $parentcategories )  , $posttypeperms ) , strval($globalCategories[log(intval($posttypeperms),2)]['parents']) ) , '1');
 
-    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, "+intval(finalcategories)+", null ); ";
+    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, "+intval($finalcategories)+", null ); ";
     qq($query, "500 Internal Server Error");
     
     echo 1;

@@ -20,7 +20,7 @@ if (isset($feedname)){
     $result=qq($query);
     if ($result->num_rows==1){
         $categoryassoc = $result->fetch_assoc();
-        $category = gmp_init(2)**gmp_init($categoryassoc['id']);
+        $category = BC::pow(2, $categoryassoc['id']);
         $title=$categoryassoc['name'];
         $feedid = $categoryassoc['id'];
     } else {
@@ -30,17 +30,17 @@ if (isset($feedname)){
         exit();
     }
 } else if (isset($feedid)){
-    $category = gmp_init(2)**gmp_init($feedid);
+    $category = BC::pow(2,$feedid);
     $query="SELECT * FROM categories WHERE id = ${feedid}";
     $categoryassoc = qq($query)->fetch_assoc();
     $title=$categoryassoc['name'];
 }
 
 $cols=getcols();
-$staticcategory = $category | 2**2 | gmp_init($categoryassoc['parents']); //EXACT SAME CATEGORIES
+$staticcategory = BC::bitOr($category,BC::bitOr(2**2,$categoryassoc['parents'])); //EXACT SAME CATEGORIES
 $notcategory = 2**2 | 2**5;  //TODO FUNNY STUFF WITH CATEGORIES HERE PLEASE FIX & |
-$votecategory = $category | 2**4;    
-$alertcategory = $category | 2**5;
+$votecategory = BC::bitOr($category, 2**4);    
+$alertcategory = BC::bitOr($category, 2**5);
 $query=$posts_data_query."WHERE textupdates.replaced_at IS NULL AND posts.category ";
 $queryend=" AND posts.deleted_at IS ".($archive ? "NOT" : "")." NULL ORDER BY posts.created_at DESC";
 $result=qq($query."= ${staticcategory}".$queryend);

@@ -39,7 +39,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
 
     assertExitCode($postdataobj->num_rows==0, "404 Not Found");
     $postdata=$postdataobj->fetch_assoc();
-    assertExitCode(($userperms & gmp_init($postdata['p_category'])) == 0, "403 Forbidden");
+    assertExitCode(BC::comp(BC::bitAnd($userperms , ($postdata['p_category'])) , 0), "403 Forbidden");
 
     
     $query="UPDATE textupdates SET replaced_at = NOW() WHERE post_id = ${_POST['id']} AND replaced_at IS NULL";
@@ -70,7 +70,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
         "vote"=>16,
         "alert"=>32,
     ];
-    $finalcategories= BC::bitOr($addedpostcategories,BC::bitOr( $parentcategories,$postTypes[$_POST['type']));
+    $finalcategories= BC::bitOr($addedpostcategories,BC::bitOr( $parentcategories,$postTypes[$_POST['type']]));
     $end_date = isset($_POST['end_date']) ? "'".$_POST['end_date']."'" : "null";
 
     $postoptions = isset ($_POST['options']) ? "'".json_encode($_POST['options'])."'" : "null" ;

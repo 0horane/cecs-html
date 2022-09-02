@@ -1,15 +1,15 @@
 <?php
 
 
-$category = gmp_init($content["p_category"]) & 0b111100;
+$category = BC::bitAnd($content["p_category"], 0b111100);
 $title=$content['p_title'];
 $margins=0;
 $redback=0;
 $showauthor= $showauthor ?? 0;
 $articleborder=0; //normally managed by feed. Maybe it shoudnt? TODO
 $dates=1;
-$canedit   = $loggedin && ((gmp_init($_SESSION['perms']) & gmp_init($content['p_category'])) != 0) ;
-$isdeleted = (gmp_init($content['p_category']) & 512) != 0;
+$canedit   = $loggedin && !BC::comp(BC::bitAnd($_SESSION['perms'], $content['p_category']),0) ;
+$isdeleted = BC::comp(BC::bitAnd(($content['p_category']), 512), 0);
 $isreplaced = $content['t_replaced_at'];
 $restore=0;
 $viewhist=1;
@@ -47,7 +47,7 @@ if (empty(array_diff( str_split(($content['t_css']  ?? "")), str_split("/*CSS:DE
 
 if ($displayas=="fullpage"){
     $viewdetails=0;
-    switch ($category){
+    switch (intval($category)){
         case 4:  //estatico
             $title=0;
             $showcategories=0;
@@ -138,13 +138,13 @@ $shortenstrip=true;
 }
 if ($crop){
     $sniplen=$sniplen ?? 400;
-    if ($category==0b10000){
+    if (BC::comp($category,0b10000)){
         $sniplen-=50;
     }
     $snippetviable=htmlspecialchars_decode( strip_tags($content['t_content']));
     $content['t_content']=mb_substr($snippetviable,0,$sniplen).(mb_substr($snippetviable,$sniplen) ? "...<br><a href='/articulo/${content['p_id']}".($content['t_replaced_at'] ? "/historia/" . $content['t_id']  : "")."' class='text-blue-600 hover:underline'>Ver mas</a>" : "");
 }
-if ($category==16){
+if (BC::comp($category, 16)){
     $voteoptions=json_decode($content['p_options']);
     if (new dateTime($content['p_end_date']) < new dateTime() || !$loggedin){
         $votephase=2;
@@ -171,7 +171,7 @@ if ($showcategories){
     
     $showncategoryarr=[];
     foreach ($allcategoriesassoc as $fcatid=>$fcat){
-        if ( ((2**gmp_init($fcatid)) & $content['p_category'])!=0 ){
+        if (!BC::comp( BC::bitAnd(BC::pow(2**$fcatid), $content['p_category']),0 )){
             $parentcats|=$fcat['parents'];
             $tempcatassoc[$fcatid]=$fcat;
         }
@@ -180,7 +180,7 @@ if ($showcategories){
     foreach ($tempcatassoc as $fcatid=>$fcat){
         //echo "<br> ".$fcatid." ".$fcat." ".$parentcats." ";
 
-        if ( ($parentcats & (2**gmp_init($fcatid))) == 0 ){
+//        if ( ($parentcats & (2**gmp_init($fcatid))) == 0 ){
             $showncategoryarr[$fcatid]=$fcat;
 
         }

@@ -11,7 +11,7 @@ $userdata= authenticate(true);
 $userid=$userdata[0];
 $userperms=$userdata[1];
 
-assertExitCode( ($userperms & 1024 ) == 0 , "403 Forbidden");
+assertExitCode( BC::comp(BC::bitAnd($userperms , 1024 ) , 0) , "403 Forbidden");
 
 
 if (isset($_POST['id'])){
@@ -52,7 +52,7 @@ if (isset($_POST['id'])){
     $code=substr(md5(rand()),0,8);
   }
 
-  $query="INSERT INTO users VALUES(null, '${_POST['name']}', null, "+intval(submittedPerms)+", null, null, null, null, NOW(), '${code}')";
+  $query="INSERT INTO users VALUES(null, '${_POST['name']}', null, "+intval($submittedPerms)+", null, null, null, null, NOW(), '${code}')";
   $result=qq($query, "500 Internal Server Error");
   echo true;
 

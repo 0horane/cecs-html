@@ -8,7 +8,7 @@ assertExitCode( !isset($_POST['id']) || !isset($_POST['vote']), "400 Bad Request
 $query="SELECT * FROM posts WHERE id = ${_POST['id']}";
 $votepostobj=qq($query, "500 Internal Server Error");
 $votepost=$votepostobj->fetch_assoc();
-assertExitCode( !($votepostobj->num_rows==1) || ( ($votepost['category'] & 16 ) == 0 ), "400 Bad Request");
+assertExitCode( !($votepostobj->num_rows==1) || BC::comp( BC::bitAnd($votepost['category'] , 16 ) , 0 ), "400 Bad Request");
 
 assertExitCode( new dateTime($votepost['end_date']) < new dateTime(), "403 Forbidden");
 
