@@ -1,5 +1,5 @@
 <?php
-
+use BCMathExtended\BC;
 
 $category = BC::bitAnd($content["p_category"], 0b111100);
 $title=$content['p_title'];

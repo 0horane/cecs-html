@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 //Creates a new code and corresponding user. 
 //Inputs: name: new user name
 //        perms: a json list of all permissions

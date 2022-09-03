@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 //Modifies a user. 
 //
 //Reurns: 1 if success. 

@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 
 //Creates/edits post
 //Inputs:

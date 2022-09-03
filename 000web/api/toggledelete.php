@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 
 $userdata= authenticate(true);
 $userid=$userdata[0];

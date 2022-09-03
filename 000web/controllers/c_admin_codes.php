@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 $title="Administrador de codigos";
 $headertags='
 <link href="https://leneth.neocities.org/cecsdata/css/codes.css" rel="stylesheet">

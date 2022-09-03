@@ -1,4 +1,5 @@
 <?php
+use BCMathExtended\BC;
 include 'assets/ver.php';
 
 $title="Editando articulo";

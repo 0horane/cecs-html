@@ -1,4 +1,5 @@
 <?php 
+use BCMathExtended\BC;
 //$url = strpos($_SERVER['REQUEST_URI'], "?")===false ? $_SERVER['REQUEST_URI'] :  strstr($_SERVER['REQUEST_URI'],"?",true);
 include 'assets/ver.php';
 require_once 'assets/database.php';

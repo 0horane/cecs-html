@@ -1,4 +1,4 @@
-<?php include_once 'assets/database.php';$hashero=$hashero??false; ?>
+<?php include_once 'assets/database.php';$hashero=$hashero??false; use BCMathExtended\BC;?>
   
 
 <nav class="navbar navbar-expand-lg <?= $hashero ? "navbar-dark" : "navbar-light" ?> bg-faded shadow-5-strong">
