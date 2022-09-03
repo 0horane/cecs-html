@@ -171,7 +171,7 @@ if ($showcategories){
     
     $showncategoryarr=[];
     foreach ($allcategoriesassoc as $fcatid=>$fcat){
-        if (!BC::comp( BC::bitAnd(BC::pow(2**$fcatid), $content['p_category']),0 )){
+        if (!BC::comp( BC::bitAnd(BC::pow(2, $fcatid), $content['p_category']),0 )){
             $parentcats|=$fcat['parents'];
             $tempcatassoc[$fcatid]=$fcat;
         }
