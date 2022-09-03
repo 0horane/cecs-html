@@ -41,7 +41,7 @@
     </div> <?php } ?>
     <?php if ($shadowcontain){ ?>
         <template>
-            <link href="https://leneth.neocities.org/cecsdata/cdn/tailwind.min.css" rel="stylesheet">
+            <link href="https://leneth.neocities.org/cecsdata/cdn/tailwind.comp.css" rel="stylesheet">
             <link href="https://leneth.neocities.org/cecsdata/css/main.css" rel="stylesheet">
             <?php $displaysnippet(); ?>
         </template>

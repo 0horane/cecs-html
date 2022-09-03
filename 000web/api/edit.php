@@ -40,7 +40,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
 
     assertExitCode($postdataobj->num_rows==0, "404 Not Found");
     $postdata=$postdataobj->fetch_assoc();
-    assertExitCode(BC::comp(BC::bitAnd($userperms , ($postdata['p_category'])) , 0), "403 Forbidden");
+    assertExitCode(!BC::comp(BC::bitAnd($userperms , ($postdata['p_category'])) , 0), "403 Forbidden");
 
     
     $query="UPDATE textupdates SET replaced_at = NOW() WHERE post_id = ${_POST['id']} AND replaced_at IS NULL";
@@ -60,8 +60,8 @@ if (isset($_POST['id'])){ //if editing (not creating new)
         $addedpostcategories = BC::bitOr( $addedpostcategories, BC::pow('2',$category));
     }
 
-    assertExitCode(!( BC::comp($addedpostcategories,  BC::bitAnd($userperms , $addedpostcategories) ) ), "403 Forbidden");
-    assertExitCode(BC::comp($addedpostcategories, '0'), "403 Forbidden");
+    assertExitCode(!( !BC::comp($addedpostcategories,  BC::bitAnd($userperms , $addedpostcategories) ) ), "403 Forbidden");
+    assertExitCode(!BC::comp($addedpostcategories, '0'), "403 Forbidden");
     assertExitCode(!(isset($_POST['type']) && isset($_POST['title'])), "400 Bad Request");
     assertExitCode($_POST['type']=='vote' && !( isset($_POST['end_date']) && $_POST['options'] != "[]"  ), "400 Bad Request");
     

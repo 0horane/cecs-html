@@ -7,7 +7,8 @@
     <title><?= $title ?? "Centro de estudiantes de la Confederacion Suiza" ?></title>
     <link href="https://leneth.neocities.org/cecsdata/cdn/bootstrap.min.css" rel="stylesheet">
     <script src="https://leneth.neocities.org/cecsdata/cdn/bootstrap.bundle.min.js" ></script>
-    <link href="https://leneth.neocities.org/cecsdata/cdn/tailwind.comp.css"></link>
+    <!--<link href="https://leneth.neocities.org/cecsdata/cdn/tailwind.comp.css"></link>-->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://leneth.neocities.org/cecsdata/cdn/sweetalert2@11.js" defer></script>
     <link rel="icon" href="/favicon.ico" type="image/ico">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -10,7 +10,7 @@ use BCMathExtended\BC;
 $userdata= authenticate(true);
 $userid=$userdata[0];
 $userperms=$userdata[1];
-assertExitCode( BC::comp(BC::bitAnd($userperms , 4096 ) , 0) , "403 Forbidden");
+assertExitCode( !BC::comp(BC::bitAnd($userperms , 4096 ) , 0) , "403 Forbidden");
 assertExitCode( !(isset($_POST['id']) ) , "400 Bad Request");
 assertExitCode( $_POST['id']<20  , "403 Forbidden");
 assertExitCode( $_POST['id']>63  , "400 Bad Request");

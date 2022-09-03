@@ -52,7 +52,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/secretarias">Secretarias</a></li>
-            <?php foreach ($allcategoriesassoc as $nsecretaria){ if (!BC::comp(BC::bitAnd($nsecretaria['parents'], 0b1000000),  0)){ ?>
+            <?php foreach ($allcategoriesassoc as $nsecretaria){ if (BC::comp(BC::bitAnd($nsecretaria['parents'], 0b1000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/secretaria/<?= $nsecretaria['urlname'] ?>"><?= $nsecretaria['name'] ?></a></li>
             <?php } } ?>
           </ul>
@@ -63,7 +63,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/comisiones">Comisiones</a></li>
-            <?php foreach ($allcategoriesassoc as $ncomision){ if (!BC::comp(BC::bitAnd($ncomision['parents'], 0b10000000),  0)){ ?>
+            <?php foreach ($allcategoriesassoc as $ncomision){ if (BC::comp(BC::bitAnd($ncomision['parents'], 0b10000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/comision/<?= $ncomision['urlname'] ?>"><?= $ncomision['name'] ?></a></li>
             <?php } } ?>
           </ul>
@@ -74,7 +74,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/clubes">Clubes</a></li>
-            <?php foreach ($allcategoriesassoc as $nclub){ if (!BC::comp(BC::bitAnd($nclub['parents'], 0b100000000),  0)){ ?>
+            <?php foreach ($allcategoriesassoc as $nclub){ if (BC::comp(BC::bitAnd($nclub['parents'], 0b100000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/club/<?= $nclub['urlname'] ?>"><?= $nclub['name'] ?></a></li>
             <?php } } ?>
           </ul>
@@ -95,10 +95,10 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/logout">Cerrar sesion</a></li>
             <?php $_userperms=$_SESSION['perms']; ?>
-            <?= !BC::comp($_userperms, 0) ? '<li><a class="dropdown-item font-sans" href="/editar">Nuevo Post</a></li>' : "" ?>
-            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b10000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/codes">Administrar Codigos</a></li>' : "" ?>
-            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b100000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/users">Administrar Usuarios</a></li>' : "" ?>
-            <?= !BC::comp(BC::bitAnd($_userperms, strval(0b1000000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/cats">Administrar Categorias</a></li>' : "" ?>
+            <?= BC::comp($_userperms, 0) ? '<li><a class="dropdown-item font-sans" href="/editar">Nuevo Post</a></li>' : "" ?>
+            <?= BC::comp(BC::bitAnd($_userperms, strval(0b10000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/codes">Administrar Codigos</a></li>' : "" ?>
+            <?= BC::comp(BC::bitAnd($_userperms, strval(0b100000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/users">Administrar Usuarios</a></li>' : "" ?>
+            <?= BC::comp(BC::bitAnd($_userperms, strval(0b1000000000000)), 0) ? '<li><a class="dropdown-item font-sans" href="/admin/cats">Administrar Categorias</a></li>' : "" ?>
           </ul>
         </li>
         <?php } ?>

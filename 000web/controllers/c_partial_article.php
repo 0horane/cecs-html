@@ -8,7 +8,7 @@ $redback=0;
 $showauthor= $showauthor ?? 0;
 $articleborder=0; //normally managed by feed. Maybe it shoudnt? TODO
 $dates=1;
-$canedit   = $loggedin && !BC::comp(BC::bitAnd($_SESSION['perms'], $content['p_category']),0) ;
+$canedit   = $loggedin && BC::comp(BC::bitAnd($_SESSION['perms'], $content['p_category']),0) ;
 $isdeleted = BC::comp(BC::bitAnd(($content['p_category']), 512), 0);
 $isreplaced = $content['t_replaced_at'];
 $restore=0;
@@ -138,13 +138,13 @@ $shortenstrip=true;
 }
 if ($crop){
     $sniplen=$sniplen ?? 400;
-    if (BC::comp($category,0b10000)){
+    if (!BC::comp($category,0b10000)){
         $sniplen-=50;
     }
     $snippetviable=htmlspecialchars_decode( strip_tags($content['t_content']));
     $content['t_content']=mb_substr($snippetviable,0,$sniplen).(mb_substr($snippetviable,$sniplen) ? "...<br><a href='/articulo/${content['p_id']}".($content['t_replaced_at'] ? "/historia/" . $content['t_id']  : "")."' class='text-blue-600 hover:underline'>Ver mas</a>" : "");
 }
-if (BC::comp($category, 16)){
+if (!BC::comp($category, 16)){
     $voteoptions=json_decode($content['p_options']);
     if (new dateTime($content['p_end_date']) < new dateTime() || !$loggedin){
         $votephase=2;
@@ -171,8 +171,8 @@ if ($showcategories){
     
     $showncategoryarr=[];
     foreach ($allcategoriesassoc as $fcatid=>$fcat){
-        if (!BC::comp( BC::bitAnd(BC::pow(2, $fcatid), $content['p_category']),0 )){
-            $parentcats|=$fcat['parents'];
+        if (BC::comp( BC::bitAnd(BC::pow(2, $fcatid), $content['p_category']),0 )){
+            $parentcats = BC::bitOr($parentcats, $fcat['parents']);
             $tempcatassoc[$fcatid]=$fcat;
         }
     }

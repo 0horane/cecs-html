@@ -12,7 +12,7 @@ $userdata= authenticate(true);
 $userid=$userdata[0];
 $userperms=$userdata[1];
 
-assertExitCode( BC::comp(BC::bitAnd($userperms , 1024 ) , 0) , "403 Forbidden");
+assertExitCode( !BC::comp(BC::bitAnd($userperms , 1024 ) , 0) , "403 Forbidden");
 
 
 if (isset($_POST['id'])){
@@ -29,7 +29,7 @@ if (isset($_POST['id'])){
     assertExitCode( !$oldrowobj || !$oldrowobj->num_rows, "400 Bad Request");
     $oldrow=$oldrowobj->fetch_assoc();
     $changedperms=  BC::bitXor( $_POST['perms'], $oldrow['perms']);
-    assertExitCode( !( BC::comp( BC::bitAnd($userperms, $changedperms), $changedperms)), "403 Forbidden");
+    assertExitCode( !( !BC::comp( BC::bitAnd($userperms, $changedperms), $changedperms)), "403 Forbidden");
 
     $query= "UPDATE users SET name = '${_POST['name']}' , perms = ${_POST['perms']} WHERE id = ${_POST['id']} AND password IS NULL";
     qq($query, "500 Internal Server Error");
@@ -45,7 +45,7 @@ if (isset($_POST['id'])){
     $submittedPerms = BC::bitOr($submittedPerms, BC::pow('2'**$category));   
   }
 
-  assertExitCode(!(BC::comp($submittedPerms == BC::bitAnd($userperms, $submittedPerms))), "403 Forbidden");
+  assertExitCode(!(!BC::comp($submittedPerms == BC::bitAnd($userperms, $submittedPerms))), "403 Forbidden");
   assertExitCode(!(isset($_POST['name']) && $_POST['name']!=""), "400 Bad Request");
 
   $code= substr(md5(rand()),0,8);
