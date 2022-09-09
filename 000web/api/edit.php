@@ -80,7 +80,7 @@ if (isset($_POST['id'])){ //if editing (not creating new)
         $css = sanitize("'/*CSS:DEFAULT*/'");
     }
 
-    $query= "INSERT INTO posts VALUES(null, '${_POST['title']}', NOW(), null, "+intval($finalcategories)+", ${end_date}, ${postoptions} ); ";
+    $query= "INSERT INTO posts VALUES(null, '${_POST['title']}', NOW(), null, $finalcategories, ${end_date}, ${postoptions} ); ";
     qq($query, "500 Internal Server Error");
     
     $newpostID=qq("SELECT MAX(id)  FROM  posts", "500 Internal Server Error")->fetch_row()[0];

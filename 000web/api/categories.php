@@ -54,7 +54,7 @@ assertExitCode( $_POST['id']>63  , "400 Bad Request");
     $posttypeperms=$catTypes[$_POST['type']];
     $finalcategories= BC::bitOr( BC::bitOr( BC::bitOr( BC::bitOr( $addedpostcategories, $parentcategories )  , $posttypeperms ) , strval($globalCategories[log(intval($posttypeperms),2)]['parents']) ) , '1');
 
-    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, "+intval($finalcategories)+", null ); ";
+    $query= "INSERT INTO categories VALUES(${_POST['id']}, '${_POST['name']}', ${urlname}, $finalcategories, null ); ";
     qq($query, "500 Internal Server Error");
     
     echo 1;
