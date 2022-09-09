@@ -42,7 +42,7 @@ if (isset($_POST['id'])){
   $submittedPerms='0'; //this one verifies if the user has all the required categories
 
   foreach ($_POST['perms'] as $category){
-    $submittedPerms = BC::bitOr($submittedPerms, BC::pow('2', category));   
+    $submittedPerms = BC::bitOr($submittedPerms, BC::pow('2', $category));   
   }
 
   assertExitCode(!(!BC::comp($submittedPerms, BC::bitAnd($userperms, $submittedPerms))), "403 Forbidden");
