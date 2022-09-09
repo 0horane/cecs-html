@@ -29,7 +29,7 @@ function newcat(event){
         Swal.fire({ title: 'El categoria no se ha creado', icon: 'error', text: error, showCancelButton: true, confirmButtonText: 'Reintentar',})
         .then((result) => {
             if (result.isConfirmed) {
-                newcat (formData);
+                newcat (event);
             }   
         });
     });

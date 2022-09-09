@@ -18,7 +18,7 @@ function newcode(event){
         Swal.fire({ title: 'El codigo no se ha creado', icon: 'error', text: error, showCancelButton: true, confirmButtonText: 'Reintentar',})
         .then((result) => {
             if (result.isConfirmed) {
-                newcode (formData);
+                newcode (event);
             }   
         });
     });
