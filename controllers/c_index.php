@@ -1,5 +1,5 @@
 <?php
-$title="¡Bienvenido a la pagina del centro de estudiantes!";
+$title="Centro de Estudiantes de la Confederación Suiza";
 $headertags='<link href="/css/apithing.css" rel="stylesheet">';
 
 require_once 'assets/session_start.php';
