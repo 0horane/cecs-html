@@ -48,10 +48,10 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle font-sans" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Secretarias
+            Secretarías
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item font-sans" href="/secretarias">Secretarias</a></li>
+            <li><a class="dropdown-item font-sans" href="/secretarias">Secretarías</a></li>
             <?php foreach ($allcategoriesassoc as $nsecretaria){ if (BC::comp(BC::bitAnd($nsecretaria['parents'], 0b1000000),  0)){ ?>
               <li><a class="dropdown-item font-sans" href="/secretaria/<?= $nsecretaria['urlname'] ?>"><?= $nsecretaria['name'] ?></a></li>
             <?php } } ?>
