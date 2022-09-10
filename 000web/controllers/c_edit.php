@@ -18,8 +18,8 @@ $headertags=<<<EOF
     <script src="https://leneth.neocities.org/cecsdata/cdn/javascript-hint.min.js" defer></script>
     <script src="https://leneth.neocities.org/cecsdata/cdn/active-line.min.js" defer></script>
     <script src="https://leneth.neocities.org/cecsdata/cdn/matchbrackets.min.js" defer></script>
-    <link rel="stylesheet" href="https://leneth.neocities.org/cecsdata/cdn/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://leneth.neocities.org/cecsdata/cdn/show-hint.min.css" integrity="sha512-OmcLQEy8iGiD7PSm85s06dnR7G7C9C0VqahIPAj/KHk5RpOCmnC6R2ob1oK4/uwYhWa9BF1GC6tzxsC8TIx7Jg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://leneth.neocities.org/cecsdata/cdn/codemirror.min.css"  />
+    <link rel="stylesheet" href="https://leneth.neocities.org/cecsdata/cdn/show-hint.min.css"  />
 
 
 
