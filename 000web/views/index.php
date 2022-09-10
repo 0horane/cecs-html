@@ -20,7 +20,7 @@
         </div>
     </div>
 </header> 
-<div style="height: 70vh;width:100vw;">
+<div style="height: 70vh;width:100%;">
 
 </div>
 <div class="flex gap-2 flex-column w-full">
@@ -84,18 +84,18 @@
     top:0;
     z-index:-1;
   	height: 80vh;
-    width:100vw;
+    width:100%;
   	background-image: 
-      linear-gradient(rgba(255,255,255,.3) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(255,255,255,.3) 2px, transparent 2px),
-        linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,.3) 1.3px, transparent 1.3px),
+        linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px),
 	  linear-gradient(to right bottom, rgba(32, 44, 150, 0.8 ), rgba(53, 38, 137, 0.8)),
      url('https://leneth.neocities.org/cecsdata/img/school.webp');
     background-size:100px 100px, 100px 100px, 25px 25px, 25px 25px, cover, cover;
     background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px, top, top;  	
   	position: absolute;
-  	clip-path: polygon(0 0, 100vw 0, 100vw 100%, 0 65vh);
+  	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65vh);
 }
 .navbar{
     background-color: transparent !important;
@@ -120,6 +120,27 @@
     }
     
 }
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.95);
+}
+
+/*
+body::-webkit-scrollbar{
+    width: 15px;
+    background-color: rgba(5, 21, 35, 0.2);
+}
+body::-webkit-scrollbar-thumb{
+    background: rgba(50, 15, 200, 0.4);;
+}
+body{
+    display:scroll;
+    display:overlay;
+*/
+.expanded-navbar{
+    background-color: rgba(0,0,0,.6) !important;
+}
+
+
     </style>
 
 <?php /*
