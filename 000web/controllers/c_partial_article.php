@@ -42,9 +42,7 @@ while ($content['t_css']!=($tempcss=htmlspecialchars_decode(preg_replace_callbac
 
 if (empty(array_diff( str_split(($content['t_css']  ?? "")), str_split("/*CSS:DEFAULT*/")))){
     $content['t_css']=<<<EOF
-.center{
-  text-align: center;
-} .articlebody{ max-width: max(70vw, min(90%,350px)); font-family: Arial, Helvetica, sans-serif; margin:2rem 5vw; } h1{ font-size: 2.6em; } h2{ font-size: 2.3em; } h3{ font-size: 2em; } h4{ font-size: 1.6em; } h5{ font-size: 1.3em; } h6{ font-size: 1em; } h1, h2, h3, h4, h5, h6{ font-weight:bold; }
+.center{ text-align: center; } .articlebody{ max-width: max(70vw, min(90%,350px)); font-family: Arial, Helvetica, sans-serif; margin:2rem 5vw; } h1{ font-size: 2.6em; } h2{ font-size: 2.3em; } h3{ font-size: 2em; } h4{ font-size: 1.6em; } h5{ font-size: 1.3em; } h6{ font-size: 1em; } h1, h2, h3, h4, h5, h6{ font-weight:bold; }
 EOF;
 }
 
