@@ -1,0 +1,32 @@
+.header {
+	top: 0;
+	z-index: -1;
+	height: 80vh;
+	width: 100%;
+	background-image: linear-gradient(
+			rgba(255, 255, 255, 0.3) 1.3px,
+			transparent 1.3px
+		),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+		linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+		linear-gradient(
+			to right bottom,
+			rgba(32, 44, 150, 0.8),
+			rgba(53, 38, 137, 0.8)
+		),
+		url('/img/school.webp');
+	background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px, cover, cover;
+	background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px, top, top;
+	position: absolute;
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65vh);
+}
+/*  */
+.header {
+	z-index: 10;
+}
+
+.spaceBlock {
+	z-index: -1;
+	position: relative;
+}

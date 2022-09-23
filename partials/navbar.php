@@ -1,6 +1,7 @@
 <?php include_once 'assets/database.php';$hashero=$hashero??false; ?>
-  
-
+<style>
+<?php include 'newStyles/navBar.css'; ?>
+</style>
 <nav class="navbar navbar-expand-lg <?= $hashero ? "navbar-dark" : "navbar-light" ?> bg-faded shadow-5-strong">
   <div class="container-fluid">
     <a href="/" style="height:50px;width:50px;margin-right:10px;">
@@ -16,21 +17,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 navBarContainer">
+      <div class='leftNavBar'>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle font-sans" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Informacion
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item font-sans" href="/info">Que es el centro?</a></li>
-            <li><a class="dropdown-item font-sans" href="/participacion">Participacion</a></li>
-            <li><a class="dropdown-item font-sans" href="/funcionamiento">Funcionamiento del centro</a></li>
+            <!-- <li><a class="dropdown-item font-sans" href="/participacion">Participacion</a></li> -->
+            <!-- <li><a class="dropdown-item font-sans" href="/funcionamiento">Funcionamiento del centro</a></li> -->
             <li><a class="dropdown-item font-sans" href="/estatuto">Estatuto</a></li>
-            <li><a class="dropdown-item font-sans" href="/sitio">Informacion del Sitio</a></li>
-            <li><a class="dropdown-item font-sans" href="/contacto">Contacto</a></li>
-            <li><a class="dropdown-item font-sans" href="/miembros">Miembros</a></li>
-            <li><a class="dropdown-item font-sans" href="/transparencia">Transparencia</a></li>
-            <li><a class="dropdown-item font-sans" href="/docs">Informacion Tecnica</a></li>
+            <!-- <li><a class="dropdown-item font-sans" href="/sitio">Informacion del Sitio</a></li> -->
+            <li><a class="dropdown-item font-sans" href="/info/#contacto">Contacto</a></li>
+            <!-- <li><a class="dropdown-item font-sans" href="/miembros">Miembros</a></li> -->
+            <!-- <li><a class="dropdown-item font-sans" href="/transparencia">Transparencia</a></li> -->
+            <!-- <li><a class="dropdown-item font-sans" href="/docs">Informacion Tecnica</a></li> -->
 
           </ul>
         </li>
@@ -57,7 +59,7 @@
             <?php } } ?>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle font-sans" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Comisiones
           </a>
@@ -67,8 +69,8 @@
               <li><a class="dropdown-item font-sans" href="/comision/<?= $ncomision['urlname'] ?>"><?= $ncomision['name'] ?></a></li>
             <?php } } ?>
           </ul>
-        </li>
-        <li class="nav-item dropdown">
+        </li> -->
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle font-sans" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Clubes
           </a>
@@ -78,8 +80,13 @@
               <li><a class="dropdown-item font-sans" href="/club/<?= $nclub['urlname'] ?>"><?= $nclub['name'] ?></a></li>
             <?php } } ?>
           </ul>
-        </li>
-        
+        </li> -->
+        </div>
+        <div class='rightNavBar'>
+        <form class="d-flex" action="/busqueda">
+          <input class="form-control bg-white/10 focus:bg-white/25 me-2 <?= $hashero ? "text-white placeholder:text-gray-100" : "" ?>" name="q" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
         <?php if (!$loggedin){ ?>
         <li class="nav-item">
           <a class="nav-link font-sans" href="/login">Iniciar sesion</a>
@@ -102,11 +109,9 @@
           </ul>
         </li>
         <?php } ?>
+        </div>
       </ul>
-      <form class="d-flex" action="/busqueda">
-        <input class="form-control bg-white/10 focus:bg-white/25 me-2 <?= $hashero ? "text-white placeholder:text-gray-100" : "" ?>" name="q" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
+  
 </nav>
