@@ -1,0 +1,17 @@
+small {
+	text-align: center;
+	display: block;
+	margin-bottom: 10px;
+	color: #0d6efd;
+}
+.schoolLogo {
+	height: 75px;
+	width: 75px;
+	margin: 0 auto;
+}
+.li-footer {
+	margin: 5px;
+}
+.footerSocialLogo {
+	font-size: 26px;
+}

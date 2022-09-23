@@ -1,0 +1,39 @@
+.navbar {
+	background-color: transparent !important;
+	position: sticky !important;
+}
+@media screen and (max-width: 600px) {
+	.navbartexts {
+		transform: translateY(-10%) !important;
+	}
+	.header {
+		clip-path: polygon(0 0, 100vw 0, 100vw 100%, 0 70vh);
+	}
+	.postrow {
+		flex-direction: column !important;
+		margin-left: 5vw;
+		width: 90vw;
+	}
+	.indpost {
+		width: 90vw;
+	}
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: rgba(255, 255, 255, 0.95);
+}
+.expanded-navbar {
+	background-color: rgba(0, 0, 0, 0.6) !important;
+}
+/*  ---------------------*/
+.navbar {
+	z-index: 15;
+}
+.navBarContainer {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.leftNavBar,
+.rightNavBar {
+	display: flex;
+}

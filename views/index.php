@@ -1,3 +1,7 @@
+<style>
+<?php include 'newStyles/Header.css'; ?>
+<?php include 'newStyles/index.css'; ?>
+</style>
 <header class="header">
     <div class="flex flex-column items-center justify-center w-full h-full">
         <div class="flex gap-5" style="transform: translateY(5%);">
@@ -6,13 +10,16 @@
                 <source srcset="/img/logoblanco.png" type="image/png"> 
                 <img src="/img/logoblanco.png" alt="Logo">
             </picture>
-            <picture class="h-32 w-32 lg:h-64 lg:w-64" style="transform:translatey(-17%)">
-                <source srcset="/img/suizablanco.webp" type="image/webp">
+            <picture class="h-32 w-32 lg:h-64 lg:w-64" >
+                <!-- <source srcset="/img/suizablanco.webp" type="image/webp">
                 <source srcset="/img/suizablanco.png" type="image/png"> 
-                <img src="/img/suizablanco.png" alt="Logo">
+                <img src="/img/suizablanco.png" alt="Logo"> -->
+                <source srcset="../newImages/white.webp" type="image/webp">
+                <source srcset="../newImages/white.png" type="image/png"> 
+                <img src="../newImages/white.png" alt="Logo">
             </picture>
         </div>
-        <div style="transform:translateY(-20%);" class="navbartexts flex flex-column items-center justify-center">
+        <div style="transform:translateY(-20%);" class="navbartexts flex flex-column items-center justify-center headerMainTitle">
             <span class="text-3xl lg:text-5xl text-white">CENTRO DE</span>
             <span class="text-3xl lg:text-5xl text-white">ESTUDIANTES</span>
             <span class="text-xl text-white">ESCUELA TECNICA N 26</span>
@@ -20,47 +27,88 @@
         </div>
     </div>
 </header> 
-<div style="height: 70vh;width:100%;">
-
-</div>
+<div style="height: 70vh;width:100%;" class='spaceBlock'></div>
+<!-- <div class="MainPost">
+    <h1 class='mainPostTitle'>Se viene La feria Del Plato!</h1>
+    <div class="mainPostContent">
+        <div class='mainpostContentImgCtn'>
+            <img src="../newImages/mainPost.jpg" alt="">
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi laborum eveniet. Error, ipsa facilis. Debitis magni doloribus commodi, repudiandae harum, sint ab a at hic similique provident vel nobis?</p>
+    </div>
+</div> -->
 <div class="flex gap-2 flex-column w-full">
-    <div class="flex justify-evenly flax-wrap flex-row postrow">
-        <div class="mt-1 w-2/5 h-full min-w-min overflow-hidden indpost">
-            <?php $nxtarticle($entries) ?>
-        </div>
-        <div class="mt-1 w-1/5 h-full min-w-min overflow-hidden  indpost">
-            <?php $nxtarticle($entries, 200) ?>
-        </div> 
-        <div class="w-1/5 gap-1 h-full flex flex-column">
-            <div class="mt-1 w-full h-full overflow-hidden  indpost">
-                <?php $nxtarticle($entries, 70) ?>
-            </div>
-            <div class="mt-1 w-full h-full overflow-hidden  indpost">
-                <?php $nxtarticle($entries, 70) ?>
-            </div>
-        </div>
-    </div>
-    <div class="flex justify-evenly flax-wrap flex-row postrow">
-        <div class="w-1/5 gap-1 h-full flex flex-column">
-            <div class="mt-1 w-full h-full overflow-hidden  indpost">
-                <?php $nxtarticle($entries, 70) ?>
-            </div>
-            <div class="mt-1 w-full h-full overflow-hidden  indpost">
-                <?php $nxtarticle($entries, 70) ?>
-            </div>
-        </div>    
-    
-        <div class="mt-1 w-1/5 h-full min-w-min overflow-hidden  indpost">
-            <?php $nxtarticle($entries, 200) ?>
-        </div> 
+
+    <div class="flex justify-evenly flex-wrap postrow pl">
         
-        <div class="mt-1 w-2/5 h-full min-w-min overflow-hidden indpost">
-            <?php $nxtarticle($entries, ) ?>
+        <div class="encuesta">
+            <div class="pollHeader">
+                <div class="pfpSecretaria"></div>
+                <div class="secretariaNamePersona">
+                    <h5>Finanzas</h5>
+                    <p>Alberto Fernandez</p>
+                </div>
+                <p>:</p>
+            </div>
+            <div class="pollContent">
+                <p class='question'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita accusantium numquam, error assumenda quasi officiis?</p>
+                <div class='pollOptionsCtn' >
+                    <div class='pollOptionCtn'>
+                        <button class='pollOption colored'>Opcion 1</button>
+                        <p>57.1%</p>
+                    </div>
+                    <div class='pollOptionCtn'>
+                        <button class='pollOption'>Opcion 2</button>
+                        <p>42.9%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pollFooter">
+                <div class='votes-result-ctn'>
+                    <p>14 Votes</p>
+                    <p>Final Results</p>
+                </div>
+                <p>11:08 AM · Jul 31, 2020</p>
+            </div>
         </div>
+        <div class="posteo">
+        <h5 class='reunionTitle hover:underline'><a href="/reunion/27" class='hover:text-gray-900'>Tenemos Canasta De Utiles</a></h5>
+            <span class='reunionFecha'> 
+                Fecha: 2022-02-11 20:53:19</span>
+            <div class="tags">
+            <a href="/listado/0" class="text-blue-800 font-medium text-xs leading-tight uppercase rounded transition duration-150 ease-in-out">
+                Post
+            </a>
+            <div class="reunionContent">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium officia optio culpa quibusdam fugiat. Nihil.
+                <button class='postBtn'>Ver más</button>
+            </div>
+            </div>
+        </div>
+        <div class="posteo reunion">
+            <h5 class='reunionTitle hover:underline'><a href="/reunion/27" class='hover:text-gray-900'>Torneo de Truco</a></h5>
+            <span class='reunionFecha'> 
+                Fecha: 2022-02-11 20:53:19</span>
+            <div class="tags">
+            <a href="/listado/0" class="text-blue-800 font-medium text-xs leading-tight uppercase rounded transition duration-150 ease-in-out">
+                Reuniones
+            </a>
+            <div class="reunionContent">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel repellendus reprehenderit necessitatibus, dolorem hic et rem laudantium! Eius doloribus, iste maxime ipsa aut blanditiis quae facere libero! Repellat, temporibus suscipit!
+            </div>
+            </div>
+        </div>
+        
+        <div class="mt-1 w-1/5 h-full min-w-min overflow-hidden  indpost">
+            <?php $nxtarticle($entries, 200) ?>
+        </div> 
+       
     </div>
+    
     <br>
     <hr>
     <br>
+    
     <div class="flex justify-evenly flax-wrap flex-row postrow">
         <div class="mt-1 w-1/5 h-full min-w-min overflow-hidden  indpost">
             <?php $nxtarticle($sccentries, 200) ?>
@@ -78,71 +126,6 @@
     </div>
 
 </div>
-<style>
-
-.header {
-    top:0;
-    z-index:-1;
-  	height: 80vh;
-    width:100%;
-  	background-image: 
-      linear-gradient(rgba(255,255,255,.3) 1.3px, transparent 1.3px),
-        linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px),
-	  linear-gradient(to right bottom, rgba(32, 44, 150, 0.8 ), rgba(53, 38, 137, 0.8)),
-     url('/img/school.webp');
-    background-size:100px 100px, 100px 100px, 25px 25px, 25px 25px, cover, cover;
-    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px, top, top;  	
-  	position: absolute;
-  	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 65vh);
-}
-.navbar{
-    background-color: transparent !important;
-    position: sticky !important;
-}
-
-@media screen and (max-width: 600px) {
-    .navbartexts{
-        transform:translateY(-10%) !important;
-    }
-    .header{
-        clip-path: polygon(0 0, 100vw 0, 100vw 100%, 0 70vh);
-    }
-    .postrow{
-        flex-direction: column !important;
-        margin-left: 5vw;
-        width:90vw
-    }
-    .indpost{
-        width:90vw
-
-    }
-    
-}
-.navbar-dark .navbar-nav .nav-link {
-    color: rgba(255,255,255,.95);
-}
-
-/*
-body::-webkit-scrollbar{
-    width: 15px;
-    background-color: rgba(5, 21, 35, 0.2);
-}
-body::-webkit-scrollbar-thumb{
-    background: rgba(50, 15, 200, 0.4);;
-}
-body{
-    display:scroll;
-    display:overlay;
-*/
-.expanded-navbar{
-    background-color: rgba(0,0,0,.6) !important;
-}
-
-
-    </style>
-
 <?php /*
     <!-- Empieza el carrousel -->
      
@@ -238,4 +221,6 @@ oh
 
 
 
-*/?>
+    */
+?>
+    
